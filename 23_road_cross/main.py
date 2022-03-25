@@ -4,20 +4,16 @@ from turtle import Screen
 from player import Player
 from car_manage import CarManager
 from scoreboard import Scoreboard
-import random
 
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
 
+level = 1
 cars = []
 car_generator = 6
-
 player = Player()
 score = Scoreboard()
-
-level = 1
-
 
 screen.listen()
 screen.onkey(player.up_move, "Up")
@@ -41,6 +37,7 @@ while game_is_on:
         # collision with car => game over
         if player.distance(car) < 20:
             game_is_on = False
+            score.game_over()
 
     if player.ycor() > 280:
         level += 1
@@ -49,6 +46,6 @@ while game_is_on:
         car_generator = 0
         player.level_up()
 
-
+screen.exitonclick()
 
 
