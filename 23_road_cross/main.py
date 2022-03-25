@@ -14,6 +14,7 @@ cars = []
 car_generator = 6
 
 player = Player()
+score = Scoreboard()
 
 level = 1
 
@@ -43,6 +44,8 @@ while game_is_on:
 
     if player.ycor() > 280:
         level += 1
+        score.score += 1
+        score.update()
         car_generator = 0
         player.level_up()
 
