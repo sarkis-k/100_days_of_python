@@ -14,4 +14,7 @@ class Player(Turtle):
         self.goto(0, -280)
 
     def up_move(self):
-        self.forward(10)
+        self.forward(20)
+
+    def level_up(self):
+        self.goto(0, -280)

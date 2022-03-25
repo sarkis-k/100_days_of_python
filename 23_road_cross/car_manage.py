@@ -12,7 +12,12 @@ class CarManager(Turtle):
         super().__init__()
         self.shape("square")
         self.shapesize(stretch_wid=1, stretch_len=2.5)
+        self.setheading(180)
+        self.penup()
+        self.goto(280, random.randint(-260, 260))
         self.color(random.choice(COLORS))
+        self.move_speed = 10
 
-
+    def move(self):
+        self.forward(self.move_speed)
 
