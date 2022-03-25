@@ -25,9 +25,12 @@ screen.onkey(player.up_move, "Up")
 game_is_on = True
 while game_is_on:
 
-    if car_generator % 6 == 0:
-        cars.append(CarManager())
-    car_generator +=1
+    if car_generator % 3 == 0:
+        car = CarManager()
+        for x in range(0, level):
+            car.level_up()
+        cars.append(car)
+    car_generator += 1
 
     screen.update()
     time.sleep(0.1)
@@ -39,5 +42,10 @@ while game_is_on:
             game_is_on = False
 
     if player.ycor() > 280:
+        level += 1
+        car_generator = 0
         player.level_up()
+
+
+
 
