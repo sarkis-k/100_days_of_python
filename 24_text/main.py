@@ -1,5 +1,5 @@
-file = open("my_file.txt")
+with open("my_file.txt") as file:
+    content = file.read()
+    print(content)
 
-content = file.read()
-
-print(content)
+    
