@@ -1,4 +1,3 @@
-import json
 from tkinter import *
 from tkinter import messagebox
 import random
@@ -59,6 +58,23 @@ def add_entry():
             passwd_ent.delete(0, END)
 
 
+# ----------------------------- SEARCH -------------------------------- #
+def search():
+    search_ent = web_ent.get()
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="404", message="Not Found")
+    else:
+        if search_ent in data:
+            email = data[search_ent]["email"]
+            pswd = data[search_ent]["password"]
+            messagebox.showinfo(title=search_ent, message=f"email: {email}\npassword: {pswd}")
+        else:
+            messagebox.showinfo(title="404", message="No entry such that")
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password Manager")
@@ -72,14 +88,14 @@ canvas.grid(column=1, row=1)
 # labels
 web_l = Label(text="Website:")
 web_l.grid(column=0, row=2)
-user_l = Label(text="Email/Usermane:")
+user_l = Label(text="Email/Username:")
 user_l.grid(column=0, row=3)
 passwd_l = Label(text="Password:")
 passwd_l.grid(column=0, row=4)
 
 # entries
-web_ent = Entry(width=35)
-web_ent.grid(column=1, row=2, columnspan=2)
+web_ent = Entry(width=21)
+web_ent.grid(column=1, row=2)
 web_ent.focus()
 user_ent = Entry(width=35)
 user_ent.grid(column=1, row=3, columnspan=2)
@@ -92,5 +108,7 @@ passwd_gen_b = Button(text="Generate Password", command=passwd_gen)
 passwd_gen_b.grid(column=2, row=4)
 add_b = Button(text="Add", width=36, command=add_entry)
 add_b.grid(column=1, row=5, columnspan=2)
+search_b = Button(text="Search", width=15, command=search)
+search_b.grid(column=2, row=2)
 
 window.mainloop()
