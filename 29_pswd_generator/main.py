@@ -1,12 +1,16 @@
+import json
 from tkinter import *
 from tkinter import messagebox
 import random
+import json
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 # Password Generator Project
 def passwd_gen():
+    # clear the field
     passwd_ent.delete(0, END)
+    # pswd generator
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
                'v',
                'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
@@ -15,13 +19,13 @@ def passwd_gen():
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-    password_list = []
     password_list = [random.choice(letters) for char in range(random.randint(8, 10))]
     password_list += [random.choice(symbols) for sym in range(random.randint(2, 4))]
     password_list += [random.choice(numbers) for num in range(random.randint(2, 4))]
     random.shuffle(password_list)
     password = "".join(password_list)
 
+    # inserting pswd into the field
     passwd_ent.insert(0, password)
 
 
@@ -30,13 +34,27 @@ def add_entry():
     if web_ent.get() == "" or passwd_ent.get() == "":
         messagebox.showinfo(title="Wrong Entry", message="Can't be empty")
     else:
-        is_ok = messagebox.askokcancel(title=web_ent.get(), message=f"These are the details entered: \n"
-                                                                    f"Email: {user_ent.get()}\n"
-                                                                    f"Password: {passwd_ent.get()}\n"
-                                                                    f"Is it ok to save?")
-        if is_ok:
-            with open(file="data.txt", mode="a") as file:
-                file.write(f"{web_ent.get()} | {user_ent.get()} | {passwd_ent.get()} \n")
+        new_data = {
+            web_ent.get(): {
+                "email": user_ent.get(),
+                "password": passwd_ent.get()
+            }
+        }
+        try:
+            with open("data.json", "r") as data_file:
+                # reading old data
+                data = json.load(data_file)
+        except FileNotFoundError:
+            with open("data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        else:
+            # updating old data with new data
+            data.update(new_data)
+
+            with open("data.json", "w") as data_file:
+                # saving updated data
+                json.dump(data, data_file, indent=4)
+        finally:
             web_ent.delete(0, END)
             passwd_ent.delete(0, END)
 
