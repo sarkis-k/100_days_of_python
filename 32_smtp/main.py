@@ -38,5 +38,35 @@
 
 # 4. Send the letter generated in step 3 to that person's email address.
 
+import pandas as pd
+import datetime as dt
+import random
+import smtplib
+import os
+
+now = dt.datetime.now()
+month_day = (1,1)
+
+data = pd.read_csv("birthdays.csv")
+bday_dict = {(data_row["month"], data_row["day"]): data_row for (index, data_row) in data.iterrows()}
+final_letter=""
+if month_day in bday_dict:
+    print("ta dam")
+    bday_person = bday_dict[month_day]
+    rand_letter_name = random.choice(os.listdir("/home/sk/Project/Udemy_2/everything/32_smtp/letter_templates"))
+    with open(f"letter_templates/{rand_letter_name}", "r") as letter_to_send:
+        for x in letter_to_send.readlines():
+            final_letter += x
+
+final_letter = final_letter.replace("[NAME]", bday_person["name"])
+final_letter = final_letter.replace("Angela", "Sarkis")
 
 
+with smtplib.SMTP("smtp.gmail.com") as connection:
+    connection.starttls()
+    connection.login(user=my_email, password=password)
+    connection.sendmail(
+        from_addr=my_email,
+        to_addrs="to@mail.ru",
+        msg=f"Subject:Happy BDay!\n\n"
+            f"{final_letter}")
