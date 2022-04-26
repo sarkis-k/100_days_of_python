@@ -1,19 +1,23 @@
+import smtplib
 import time
 import requests
 import datetime as dt
 
-def is_in_area():
+
+def iss_in_area():
     # return true if iss is in the circle +-5 degree
-    if my_lat-5 <=iss_lat <= my_lat+5:
-        if my_long-5 <= iss_long <= my_long+5
+    if my_lat - 5 <= iss_lat <= my_lat + 5:
+        if my_long - 5 <= iss_long <= my_long + 5:
             return True
     return False
 
+
 def is_night():
     # return true if it's night sky in my place
-    if sunset <= time_now.hour <= sunrise
+    if sunset <= time_now.hour <= sunrise:
         return True
     return False
+
 
 # ISS requests
 
@@ -44,16 +48,24 @@ data = sun_response.json()
 sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
 sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
-
 time_now = dt.datetime.now()
 
 while True:
     if is_night():
-        if is_in_area():
-            #open smtp and send an email
-            pass
+        if iss_in_area():
+            # open smtp and send an email
+            # connection = smtplib.SMTP("smtp.gmail.com")
+            # connection.starttls()
+            # connection.login(email, pass)
+            # connection.sendmail(
+            #     from_addr=,
+            #     to_addrs=,
+            #     msg="subject:\n\n"
+            #         "msg"
+            # )
+            print("sent")
+    print("not now")
     time.sleep(60)
-
 
 # Kanye West requests
 
