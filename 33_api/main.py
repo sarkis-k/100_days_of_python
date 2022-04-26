@@ -42,17 +42,26 @@ import requests
 # window.mainloop()
 
 
-# Getting
+# ISS only visible at night. get the sunset from api and if iss is in your sky notify yourself
+
+import datetime as dt
+
 parameters = {
     "lat": 34.052235,
     "lng": -118.243683,
+    "formatted": 0
 }
 
 response = requests.get("https://api.sunrise-sunset.org/json", params=parameters)
 response.raise_for_status()
 
 data = response.json()
-sunrise = data["results"]["sunrise"]
-sunset = data["results"]["sunset"]
+sunrise = data["results"]["sunrise"].split("T")[1].split(":")[0]
+sunset = data["results"]["sunset"].split("T")[1].split(":")[0]
 
-print(data)
+
+print(sunset)
+print(sunrise)
+
+time_now = dt.datetime.now()
+
