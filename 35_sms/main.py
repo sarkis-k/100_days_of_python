@@ -8,8 +8,8 @@ auth_token = twilio_auth_token
 
 api_url = "https://api.openweathermap.org/data/2.5/onecall"
 api_param = {
-    "lat": 42.824300,  # 34.052235,
-    "lon": -99.750080,  # -118.243683,
+    "lat": 34.052235,
+    "lon": -118.243683,
     "exclude": "current,minutely,daily",
     "appid": api_key
 }
