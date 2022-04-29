@@ -1,7 +1,7 @@
-THEME_COLOR = "#375362"
-
 from tkinter import *
 from quiz_brain import QuizBrain
+
+THEME_COLOR = "#375362"
 
 
 class QuizUI(Tk):
@@ -53,12 +53,9 @@ class QuizUI(Tk):
             q_text = self.quiz.next_question()
             self.canvas.itemconfig(self.question_text, text=q_text)
         else:
-            self.canvas.itemconfig(self.question_text, text="THE END")
+            self.canvas.itemconfig(self.question_text, text=f"THE END\nYour Score is {self.quiz.score}/{self.quiz.question_number}")
             self.true_b.config(state="disabled")
             self.false_b.config(state="disabled")
-
-    def get_score(self):
-        self.score = self.quiz.score
 
     def true_click(self):
         self.give_feedback(self.quiz.check_answer(user_answer="True"))
