@@ -18,11 +18,11 @@ def stock_news():
     stock_response = requests.get(url="https://www.alphavantage.co/query", params=stock_parameters)
     stock_response.raise_for_status()
     stock_data = stock_response.json()["Time Series (Daily)"]
+    stock_data_list = [value for (key, value) in stock_data.items()]
 
-    stock_yesterday = float(stock_data["2022-04-29"]["4. close"])
-    stock_before_yesterday = float(stock_data["2022-04-28"]["4. close"])
-    print(stock_yesterday)
-    print(stock_before_yesterday)
+    stock_yesterday = float(stock_data_list[0]["4. close"])
+    stock_before_yesterday = float(stock_data_list[1]["4. close"])
+
     return 100 * (abs(stock_yesterday - stock_before_yesterday)) / ((stock_yesterday + stock_before_yesterday) / 2)
 
 
