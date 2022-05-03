@@ -80,4 +80,3 @@ else:
     get_news()
     send_sms()
 
-    

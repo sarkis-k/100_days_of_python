@@ -30,8 +30,8 @@ if will_rain:
     client = Client(account_sid, auth_token)
     message = client.messages.create(
                      body="Join Earth's mightiest heroes. Like Kevin Bacon.",
-                     from_="+19894814919",
-                     to="+18184349097"
+                     from_=twilio_from_num,
+                     to=twilio_to_num
     )
     print(message.status)
 
