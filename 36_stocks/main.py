@@ -24,10 +24,6 @@ def stock_news():
     print(stock_yesterday)
     print(stock_before_yesterday)
     return 100 * (abs(stock_yesterday - stock_before_yesterday)) / ((stock_yesterday + stock_before_yesterday) / 2)
-    # if 100*(abs(stock_yesterday-stock_before_yesterday))/((stock_yesterday+stock_before_yesterday)/2)>5:
-    #     print("here")
-    # else:
-    #     print(100*(abs(stock_yesterday-stock_before_yesterday))/((stock_yesterday+stock_before_yesterday)/2))
 
 
 # STEP 2: Use https://newsapi.org
@@ -44,13 +40,10 @@ def get_news():
     news_data = news_response.json()["articles"]
     for x in range(0, 3):
         news_articles.append(news_data[x]["source"]["name"] + ": " + news_data[x]["title"])
-        # print(news_data[x]["source"]["name"]+": "+news_data[x]["title"])
 
 
-# print(news_data)
-
-## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number. 
+# STEP 3: Use https://www.twilio.com
+# Send a separate message with the percentage change and each article's title and description to your phone number.
 def send_sms():
     client = Client(twilio_account_sid, twilio_auth_token)
     for x in news_articles:
@@ -61,22 +54,13 @@ def send_sms():
                              to=twilio_to_num
                          )
 
-# Optional: Format the SMS message like this:
-"""
-TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-"""
+
 news_articles = []
 percent_change = stock_news()
-if stock_news() > 5:
+if percent_change > 5:
     get_news()
     send_sms()
 else:
-    get_news()
+    news_articles.append("Not worthy")
     send_sms()
 
