@@ -1,1 +1,9 @@
-#This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the program requirements.
+from keys import *
+from data_manager import *
+from flight_data import *
+from flight_search import *
+from notification_manager import *
+import requests
+
+FlightSearch()
+DataManager()
