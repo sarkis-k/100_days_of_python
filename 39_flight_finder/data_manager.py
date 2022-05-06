@@ -14,7 +14,7 @@ class DataManager:
         self.sheet_data = response.json()["prices"]
         return self.sheet_data
 
-    def update_data(self):
+    def update_iata(self):
         for city in self.sheet_data:
             update_load = {
                 "price": {
@@ -27,6 +27,7 @@ class DataManager:
             )
             response.raise_for_status()
             print(response.text)
+
 
 
 

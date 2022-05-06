@@ -17,8 +17,13 @@ if sheety_data[0]["iataCode"] == "":
     print(f"sheet_data:\n {sheety_data}")
 
     data_manager.sheet_data = sheety_data
-    data_manager.update_data()
+    data_manager.update_iata()
 
 for data in sheety_data:
     flight = flight_search.get_flight_values(data["iataCode"])
+    try:
+        if data["lowestPrice"] > flight.price:
+            print("it's cheaper")
+    except AttributeError:
+        pass
     time.sleep(2)
