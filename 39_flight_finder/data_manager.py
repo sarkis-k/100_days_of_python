@@ -1,11 +1,10 @@
 import requests
 from keys import *
-# import flight_search
 
 
 class DataManager:
-    #This class is responsible for talking to the Google Sheet.
-    def __int__(self):
+    # This class is responsible for talking to the Google Sheet.
+    def __init__(self):
         self.sheet_data = {}
 
     def get_data(self):
@@ -27,8 +26,3 @@ class DataManager:
             )
             response.raise_for_status()
             print(response.text)
-
-
-
-
-

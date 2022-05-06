@@ -1,9 +1,5 @@
-import time
-from pprint import pprint
-
 import requests
 from keys import *
-from data_manager import DataManager
 from flight_data import FlightData
 from datetime import datetime, timedelta
 

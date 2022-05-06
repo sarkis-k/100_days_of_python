@@ -1,10 +1,6 @@
-from keys import *
-from data_manager import *
-from flight_data import *
 from flight_search import *
-from notification_manager import *
-import requests
-from pprint import pprint
+from data_manager import DataManager
+import time
 
 data_manager = DataManager()
 sheety_data = data_manager.get_data()
