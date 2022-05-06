@@ -12,25 +12,16 @@ class FlightSearch():
 
     def iata_search(self, city):
 
-        # cities = DataManager().get_cities()
-        # cities_iata = []
-        #
-        # iata_search_endpoint = "https://tequila-api.kiwi.com/locations/query"
-        # for city in cities:
-        #     iata_param = {
-        #         "term": city
-        #     }
-        #     iata_header = {
-        #         "apikey": tequila_api
-        #     }
-        #     response = requests.get(url=iata_search_endpoint, params=iata_param, headers=iata_header)
-        #     response.raise_for_status()
-        #     data = response.json()
-        #
-        #     cities_iata.append(data["locations"][0]["code"])
-        #
-        #     time.sleep(2)
-        #
-        # return cities_iata
-        return "TESTING"
+        param = {
+            "term": city
+        }
+        header = {
+            "apikey": tequila_api
+        }
+        response = requests.get(url=iata_search_endpoint, params=param, headers=header)
+        response.raise_for_status()
+        data = response.json()
+        code = data["locations"][0]["code"]
+        return code
+
 

@@ -9,6 +9,8 @@ from pprint import pprint
 data_manager = DataManager()
 sheety_data = data_manager.get_data()
 
+# for data in sheety_data:
+
 if sheety_data[0]["iataCode"] == "":
     flight_search = FlightSearch()
     for row in sheety_data:
