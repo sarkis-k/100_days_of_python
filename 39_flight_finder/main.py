@@ -22,15 +22,6 @@ destinations = {
     } for data in sheety_data}
 
 
-
-if sheety_data[0]["iataCode"] == "":
-    for row in sheety_data:
-        row["iataCode"] = flight_search.iata_search(row["city"])
-    print(f"sheet_data:\n {sheety_data}")
-
-    data_manager.sheet_data = sheety_data
-    data_manager.update_iata()
-
 for destination_code in destinations:
     flight = flight_search.get_flight_values(destination_code)
     try:
