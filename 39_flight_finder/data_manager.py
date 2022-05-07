@@ -1,5 +1,6 @@
 import requests
 from keys import *
+from users import User
 
 
 class DataManager:
@@ -8,7 +9,7 @@ class DataManager:
         self.sheet_data = {}
 
     def get_data(self):
-        response = requests.get(sheety_url)
+        response = requests.get(sheety_prices_url)
         response.raise_for_status()
         self.sheet_data = response.json()["prices"]
         return self.sheet_data
@@ -21,8 +22,29 @@ class DataManager:
                 }
             }
             response = requests.put(
-                url=f"{sheety_url}/{city['id']}",
+                url=f"{sheety_prices_url}/{city['id']}",
                 json=update_load
             )
             response.raise_for_status()
             print(response.text)
+
+    def create_user(self, user: User):
+        post_user_load = {
+            "user":{
+                "firstname": user.name,
+                "lastname": user.lastname,
+                "email": user.email
+            }
+        }
+        response = requests.post(
+            url=sheety_user_url,
+            json=post_user_load
+        )
+        response.raise_for_status()
+        if response.status_code == 200:
+            return True
+        else:
+            return False
+
+
+
