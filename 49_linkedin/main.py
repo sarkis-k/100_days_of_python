@@ -24,9 +24,9 @@ email_input.send_keys(username)
 pass_input = driver.find_element(by=By.ID, value="password")
 pass_input.send_keys(pswd)
 pass_input.send_keys(Keys.ENTER)
-time.sleep(2)
+time.sleep(3)
 
-easy_apply = driver.find_elements(by=By.XPATH, value='/html/body/div[6]/div[3]/div[3]/div[2]/div/section[2]/div/div/div[1]/div/div[1]/div/div[2]/div[3]/div/div/div/button')
+easy_apply = driver.find_element(by=By.XPATH, value='/html/body/div[6]/div[3]/div[3]/div[2]/div/section[2]/div/div/div[1]/div/div[1]/div/div[2]/div[3]/div/div/div/button')
 easy_apply.click()
 
 next_but = driver.find_element(by=By.XPATH, value='/html/body/div[3]/div/div/div[2]/div/form/footer/div[2]/button')
