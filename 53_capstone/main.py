@@ -6,12 +6,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-
-
 houses_links = []
 houses_addresses = []
 houses_prices = []
-
 
 chrome_driver = "/home/sk/Project/chromedriver"
 driver = webdriver.Chrome(service=Service(chrome_driver))
