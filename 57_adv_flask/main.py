@@ -15,6 +15,7 @@ def home():
     my_name = "Sarkis"
     return render_template("index.html", year=year, name=my_name)
 
+
 @app.route("/guess/<name>")
 def guess(name):
     agify_param = {
@@ -30,6 +31,15 @@ def guess(name):
     gender = response.json()["gender"]
 
     return render_template("index.html", name=name, age=age_num, gender=gender )
+
+
+@app.route("/blog")
+def blog():
+    blog_url = "https://api.npoint.io/c790b4d5cab58020d391"
+    response = requests.get(url=blog_url)
+    data = response.json()
+
+    return render_template("blog.html", posts=data)
 
 
 if __name__ == "__main__":
